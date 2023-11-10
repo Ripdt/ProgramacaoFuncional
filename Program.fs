@@ -1,6 +1,4 @@
-﻿// Learn more about F# at http://fsharp.org
-
-open System
+﻿open System
 
 let dividirMaiorPeloMenor n1 n2 =
     if n1 > n2 then n1 / n2 else n2 / n1
@@ -25,6 +23,27 @@ let tipoTriangulo lado1 lado2 lado3 =
     else 
         "É um triângulo isósceles"
 
+let processarVetor =
+    [0..20]
+    |> List.filter (fun x -> x % 2 = 0)
+    |> List.map (fun x -> x * 2)
+    |> List.filter (fun x -> x % 6 = 0)
+
+let resultadoNotas nota1 nota2 nota3 =
+    let calcularMedia n1 n2 n3 =
+        (n1 + n2 + n3) / 3.0
+
+    let avaliarMedia media =
+        media > 6.0
+
+    let exibirResultado aprovado =
+        if aprovado then "Aprovado" else "Reprovado"
+
+    calcularMedia nota1 nota2 nota3
+    |> avaliarMedia
+    |> exibirResultado
+
+
 [<EntryPoint>]
 let main argv =
     Console.WriteLine("Q1 - Divisão do maior pelo menor")
@@ -40,5 +59,14 @@ let main argv =
     Console.WriteLine("\tLados: 15, 15, 10 = {0}", tipoTriangulo 15 15 10)
     
     Console.WriteLine("")
+
+    Console.WriteLine("Q3 - Processamento de Vetor")
+    Console.WriteLine("\tResultado: {0}", String.Join(", ", processarVetor))
+
+    Console.WriteLine("")
+
+    Console.WriteLine("Q4 - Resultado Notas")
+    Console.WriteLine("\tMédia e resultado: {0}", resultadoNotas 10.0 8.5 3.75)
+    Console.WriteLine("\tMédia e resultado: {0}", resultadoNotas 4.5 2.75 1.8)
 
     0 // return an integer exit code
